@@ -1,12 +1,14 @@
 pipeline{
     agent {
-        dockerfile true
+        docker{
+            image 'docker'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }       
     }
     stages {
-        stage('Example') {
+        stage('Test') {
             steps{
-                echo 'Hello World'
-                sh 'echo myCustomEnvVar= $myCustoEnvVar'
+               sh 'docker run hello-world'
             }
         }
     }
